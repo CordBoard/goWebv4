@@ -351,10 +351,15 @@ class DbHandler {
 	                return $arr;
 	            } else {
 	                // user password is incorrect
+									error_log("Password mismatch for $userobj->userno: {$password_hash} != {$pass_hash}");
 	                return NULL;
 	            }
-			} else return NULL;
+			} else {
+				error_log("User $userobj->userno is inactive");
+				return NULL;
+			}
 		} else {
+			error_log("User $name not found");
 			return NULL;
 		}
     }
